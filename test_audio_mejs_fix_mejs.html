@@ -28,11 +28,13 @@
 
         document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
           if (done) return;
+          console.log("Main callback start");
           document.getElementById("messages").innerHTML += "<p>Playong song 2</p>";
           document.getElementById("audioPlayer").src = "t2.mp3";
           document.getElementById("audioPlayer").load();
           document.getElementById("audioPlayer").play();
           done = true;
+          console.log("Main callback end");
         });
       });
     </script>

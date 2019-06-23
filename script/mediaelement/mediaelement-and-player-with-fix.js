@@ -4158,6 +4158,7 @@ var MediaElementPlayer = function () {
 				});
 
 				t.media.addEventListener('ended', function () {
+					console.log("MediaElement player callback start");
 					if (t.options.autoRewind) {
 						try {
 							t.setCurrentTime(0);
@@ -4173,7 +4174,7 @@ var MediaElementPlayer = function () {
 						}
 					}
 
-          // Commented out for Airsonic test (see in src/js/player.js)
+					// Commented out for Airsonic test (see in src/js/player.js)
 					// if (typeof t.media.renderer.stop === 'function') {
 					// 	t.media.renderer.stop();
 					// } else {
@@ -4192,6 +4193,7 @@ var MediaElementPlayer = function () {
 					} else if (!t.options.alwaysShowControls && t.controlsEnabled) {
 						t.showControls();
 					}
+					console.log("MediaElement player callback end");
 				});
 
 				t.media.addEventListener('loadedmetadata', function () {
