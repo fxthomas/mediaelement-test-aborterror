@@ -12,10 +12,12 @@
 
     <button id="play" value="Play">Play</button>
     <audio id="audioPlayer" class="mejs__player" data-mejsoptions='{"alwaysShowControls": true, "enableKeyboard": false}' width="340px" height="40px" tabindex="-1"></audio>
+    <div id="messages"></div>
 
     <script type="text/javascript">
       window.addEventListener('load', function() {
         playButton = document.getElementById("play");
+        done = false;
 
         document.getElementById("audioPlayer").addEventListener("canplay", function(ev) { console.debug("Received audio event: canplay"); console.debug(ev); })
         document.getElementById("audioPlayer").addEventListener("loadedmetadata", function(ev) { console.debug("Received audio event: loadedmetadata"); console.debug(ev); })
@@ -29,6 +31,7 @@
         document.getElementById("audioPlayer").addEventListener("captionschange", function(ev) { console.debug("Received audio event: captionschange"); console.debug(ev); })
 
         playButton.addEventListener('click', function(ev) {
+          document.getElementById("messages").innerHTML += "<p>Playong song 1</p>";
           document.getElementById("audioPlayer").src = "t1.mp3";
           document.getElementById("audioPlayer").load();
           document.getElementById("audioPlayer").dispatchEvent(new Event("waiting"));
@@ -40,9 +43,12 @@
         });
 
         document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
+          if (done) return;
+          document.getElementById("messages").innerHTML += "<p>Playong song 2</p>";
           document.getElementById("audioPlayer").src = "t2.mp3";
           document.getElementById("audioPlayer").load();
           document.getElementById("audioPlayer").dispatchEvent(new Event("waiting"));
+          done = true;
         });
       });
     </script>
