@@ -1,5 +1,7 @@
 Test case for an issue affecting MediaElement.js (and not HTML5 MediaElement)
-on Firefox. It appears (for me) to work on Chrome.
+on Firefox. It appears (for me) to work on Chrome, but since the bug appears to
+be a race condition and is heavily platform- and load-dependant, affecting
+people seemingly at random, it could still trigger for other setups.
 
 The server script purposefully waits 10s between headers and data, in order to
 avoid triggering any race conditions there.
