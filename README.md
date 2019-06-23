@@ -34,30 +34,48 @@ Tests
 
 * `test_audio_mejs_fix_mejs.html`: Test with the following patch on MEJS. This
   appears to work, and explains the root cause of the issue : the MEJS callback
-  is called, I think, after Airsonic's ; calling stop while the stream is still
-  loading makes Firefox stop everything and print `AbortError` on the console.
+  is called after Airsonic's ; calling stop while the stream is still loading
+  makes Firefox stop everything and print `AbortError` on the console.
 
-```diff
-diff --git a/src/js/player.js b/src/js/player.js
-index 04262d73..0feeb9a1 100644
---- a/src/js/player.js
-+++ b/src/js/player.js
-@@ -828,11 +828,12 @@ class MediaElementPlayer {
- 					}
- 				}
- 
--				if (typeof t.media.renderer.stop === 'function') {
--					t.media.renderer.stop();
--				} else {
--					t.pause();
--				}
-+				// Commented out for Airsonic test
-+				// if (typeof t.media.renderer.stop === 'function') {
-+				// 	t.media.renderer.stop();
-+				// } else {
-+				// 	t.pause();
-+				// }
- 
- 				if (t.setProgressRail) {
- 					t.setProgressRail();
-```
+  ```diff
+  diff --git a/src/js/player.js b/src/js/player.js
+  index 04262d73..0feeb9a1 100644
+  --- a/src/js/player.js
+  +++ b/src/js/player.js
+  @@ -828,11 +828,12 @@ class MediaElementPlayer {
+   					}
+   				}
+   
+  -				if (typeof t.media.renderer.stop === 'function') {
+  -					t.media.renderer.stop();
+  -				} else {
+  -					t.pause();
+  -				}
+  +				// Commented out for Airsonic test
+  +				// if (typeof t.media.renderer.stop === 'function') {
+  +				// 	t.media.renderer.stop();
+  +				// } else {
+  +				// 	t.pause();
+  +				// }
+   
+   				if (t.setProgressRail) {
+   					t.setProgressRail();
+  ```
+
+  Browser logs after running this test, confirming the callback order:
+
+  ```
+  GET http://localhost:8080/t1.mp3
+  [HTTP/1.0 200 OK 10010ms]
+
+  Main callback start test_audio_mejs_fix_mejs.html:31:19
+  Main callback end test_audio_mejs_fix_mejs.html:37:19
+  MediaElement player callback start mediaelement-and-player-with-fix.js:4161:14
+  MediaElement player callback end mediaelement-and-player-with-fix.js:4196:14
+
+  GET http://localhost:8080/t2.mp3
+  [HTTP/1.0 200 OK 10012ms]
+
+  MediaElement player callback start mediaelement-and-player-with-fix.js:4161:14
+  MediaElement player callback end mediaelement-and-player-with-fix.js:4196:14
+  ```
