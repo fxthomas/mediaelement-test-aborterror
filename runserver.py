@@ -18,6 +18,7 @@ if __name__ == '__main__':
     print("Go to the following pages to test!")
     print("  http://localhost:8080/test_audio_vanilla.html (Without MediaElement.js")
     print("  http://localhost:8080/test_audio_mejs.html (With MediaElement.js")
+    print("  http://localhost:8080/test_audio_mejs_wo_player.html (With MediaElement.js, w/o player controls")
     print("  http://localhost:8080/test_audio_mejs_fix.html (With MediaElement.js workaround")
     with socketserver.TCPServer(("", 8080), Handler) as httpd:
         httpd.serve_forever()
