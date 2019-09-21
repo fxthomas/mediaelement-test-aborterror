@@ -29,6 +29,11 @@ if __name__ == '__main__':
     print("")
     print("MEJS fixes:")
     print("  http://localhost:8080/test_audio_mejs_fix_mejs.html (with MediaElement.js code changes)")
+    print("  http://localhost:8080/test_audio_mejs_fix_event_order.html (with manual MediaElement.js init)")
+    print("")
+    print("For comparison, additional logs added to the scripts:")
+    print("  http://localhost:8080/test_audio_mejs_with_logs.html (issue present)")
+    print("  http://localhost:8080/test_audio_mejs_fix_event_order_with_logs.html (with manual MediaElement.js init)")
     print("")
     with socketserver.TCPServer(("", 8080), Handler) as httpd:
         httpd.serve_forever()
