@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="/script/jquery-3.4.0.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./script/mediaelement/mediaelementplayer.min.css" />
+    <script type="text/javascript" src="./script/mediaelement/mediaelement-and-player.min.js"></script>
+  </head>
+
+  <body>
+
+    <button id="play" value="Play">Play</button>
+    <audio id="audioPlayer" class="mejs__player" data-mejsoptions='{"alwaysShowControls": true, "enableKeyboard": false}' width="340px" height="40px" tabindex="-1"></audio>
+    <div id="messages"></div>
+
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+
+        messages = document.getElementById("messages");
+        playButton = document.getElementById("play");
+        done = false;
+
+        player = new MediaElementPlayer("audioPlayer", {
+          alwaysShowControls: true,
+          enableKeyboard: false,
+          isVideo: false,
+          success: function(mediaElement, originalNode) {
+            console.log("Plop");
+            player = mediaElement;
+          }
+        });
+
+        playButton.addEventListener('click', function(ev) {
+          messages.innerHTML += "<p>Playong song 1</p>";
+          player.src = "t1.mp3";
+          player.load();
+          player.play();
+        });
+
+        document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
+          if (done) return;
+          messages.innerHTML += "<p>Playong song 2</p>";
+          player.src = "t2.mp3";
+          player.load();
+          player.play();
+          done = true;
+        });
+      });
+    </script>
+
+  </body>
+</html>
