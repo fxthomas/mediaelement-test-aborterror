@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="/script/jquery-3.4.0.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./script/mediaelement/mediaelementplayer.min.css" />
+    <script type="text/javascript" src="./script/mediaelement/mediaelement-and-player.log.js"></script>
+  </head>
+
+  <body>
+
+    <button id="play" value="Play">Play</button>
+    <audio id="audioPlayer" data-mejsoptions='{"alwaysShowControls": true, "enableKeyboard": false}' width="340px" height="40px" tabindex="-1"></audio>
+    <div id="messages"></div>
+
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+        player = $("#audioPlayer").mediaelementplayer();
+        playButton = document.getElementById("play");
+        done = false;
+
+        playButton.addEventListener('click', function(ev) {
+          document.getElementById("messages").innerHTML += "<p>Playing song 1</p>";
+          document.getElementById("audioPlayer").src = "t1.mp3";
+          document.getElementById("audioPlayer").load();
+          document.getElementById("audioPlayer").play();
+        });
+
+        document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
+          console.log("Got 'ended' event in page");
+          if (done) return;
+          document.getElementById("messages").innerHTML += "<p>Playing song 2</p>";
+          document.getElementById("audioPlayer").src = "t2.mp3";
+          document.getElementById("audioPlayer").load();
+          document.getElementById("audioPlayer").play();
+          done = true;
+          console.log("Finished 'ended' event in page");
+        });
+      });
+    </script>
+
+  </body>
+</html>
