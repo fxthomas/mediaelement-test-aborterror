@@ -20,7 +20,7 @@
         done = false;
 
         playButton.addEventListener('click', function(ev) {
-          document.getElementById("messages").innerHTML += "<p>Playong song 1</p>";
+          document.getElementById("messages").innerHTML += "<p>Playing song 1</p>";
           document.getElementById("audioPlayer").src = "t1.mp3";
           document.getElementById("audioPlayer").load();
           document.getElementById("audioPlayer").play();
@@ -28,7 +28,7 @@
 
         document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
           if (done) return;
-          document.getElementById("messages").innerHTML += "<p>Playong song 2</p>";
+          document.getElementById("messages").innerHTML += "<p>Playing song 2</p>";
           document.getElementById("audioPlayer").src = "t2.mp3";
           document.getElementById("audioPlayer").load();
           document.getElementById("audioPlayer").play();

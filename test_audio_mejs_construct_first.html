@@ -32,7 +32,7 @@
         });
 
         playButton.addEventListener('click', function(ev) {
-          messages.innerHTML += "<p>Playong song 1</p>";
+          messages.innerHTML += "<p>Playing song 1</p>";
           player.src = "t1.mp3";
           player.load();
           player.play();
@@ -40,7 +40,7 @@
 
         document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
           if (done) return;
-          messages.innerHTML += "<p>Playong song 2</p>";
+          messages.innerHTML += "<p>Playing song 2</p>";
           player.src = "t2.mp3";
           player.load();
           player.play();
