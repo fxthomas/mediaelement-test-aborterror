@@ -26,6 +26,7 @@
           document.getElementById("audioPlayer").play();
         });
 
+        console.log("Registering 'ended' event in page");
         document.getElementById("audioPlayer").addEventListener('ended', function(ev) {
           console.log("Got 'ended' event in page");
           if (done) return;
